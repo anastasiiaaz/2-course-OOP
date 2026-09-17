@@ -1,6 +1,6 @@
 import React from "react";
-import { selectDialog } from "./modules/module1";
-import { inputDialog } from "./modules/module2";
+import { selectDialog } from "./modules/Module1";
+import { inputDialog } from "./modules/Module2";
 import "./index.css";
 
 class App extends React.Component {
