@@ -1,0 +1,245 @@
+:root {
+  --pink-50: #fff5f8;
+  --pink-100: #ffe4ec;
+  --pink-200: #ffc9d9;
+  --pink-400: #f58aa8;
+  --pink-600: #d6477a;
+  --text: #4a2a36;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--pink-50);
+}
+
+/* ---------- Editor window ---------- */
+
+.editor-container {
+  position: relative;
+  display: inline-block;
+  margin: 24px;
+  background: #fff;
+  border: 1px solid var(--pink-200);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(214, 71, 122, 0.12);
+}
+
+.editor-canvas {
+  display: block;
+  background: #fff;
+  cursor: crosshair;
+  touch-action: none;
+  border-radius: 0 0 10px 10px;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.button:focus-visible,
+.modal-close:focus-visible {
+  outline: 2px solid var(--pink-400);
+  outline-offset: -2px;
+}
+
+/* ---------- Menu ---------- */
+
+.menu-bar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  gap: 2px;
+  padding: 4px 6px;
+  background: var(--pink-100);
+  border-bottom: 1px solid var(--pink-200);
+  border-radius: 10px 10px 0 0;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-button {
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.menu-button:hover,
+.menu-button.active {
+  background: var(--pink-200);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--pink-200);
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(214, 71, 122, 0.18);
+}
+
+.dropdown-item {
+  padding: 7px 12px;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background: var(--pink-100);
+  color: var(--pink-600);
+}
+
+/* невидима плівка: клік поза меню його закриває */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+/* ---------- Toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  gap: 4px;
+  padding: 4px 6px;
+  background: var(--pink-50);
+  border-bottom: 1px solid var(--pink-200);
+}
+
+.tool-button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+.tool-button:hover {
+  background: var(--pink-100);
+  border-color: var(--pink-200);
+}
+
+.tool-button.active {
+  color: var(--pink-600);
+  background: var(--pink-200);
+  border-color: var(--pink-400);
+}
+
+/* check mark of the current object type in the Objects menu */
+.check {
+  display: inline-block;
+  width: 18px;
+  color: var(--pink-600);
+}
+
+.menu-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: -3px;
+}
+
+/* ---------- Modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74, 42, 54, 0.35);
+}
+
+.modal-content {
+  width: min(460px, 92vw);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--pink-200);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(214, 71, 122, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--pink-100);
+  border-bottom: 1px solid var(--pink-200);
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--pink-600);
+}
+
+.modal-close {
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--pink-600);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--pink-200);
+}
+
+.modal-body {
+  padding: 8px 18px 18px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-body h4 {
+  margin: 14px 0 2px;
+  font-size: 14px;
+  color: var(--pink-600);
+}
+
+.modal-body p {
+  margin: 0;
+}
