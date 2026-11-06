@@ -1,0 +1,96 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+left to right direction
+
+' ===== Фігури =====
+abstract class Shape {
+  #xs1 : number
+  #ys1 : number
+  #xs2 : number
+  #ys2 : number
+  #style : ShapeStyle
+  +set(x1, y1, x2, y2)
+  +setStyle(style)
+  {abstract} +show(ctx)
+  {abstract} +getName() : string
+}
+class Point
+class Line
+class Rectangle
+class Ellipse
+class LineOO {
+  -line : Line
+  -startCircle : Ellipse
+  -endCircle : Ellipse
+  +set(x1, y1, x2, y2)
+}
+class Cube {
+  -frontFace : Rectangle
+  -backFace : Rectangle
+  -edges : Line[4]
+  +set(x1, y1, x2, y2)
+}
+
+Shape <|-- Point
+Shape <|-- Line
+Shape <|-- Rectangle
+Shape <|-- Ellipse
+Shape <|-- LineOO
+Shape <|-- Cube
+
+LineOO *-- "1" Line
+LineOO *-- "2" Ellipse
+Cube *-- "2" Rectangle
+Cube *-- "4" Line
+
+' ===== Редактори =====
+abstract class Editor {
+  {abstract} +getName() : string
+  {abstract} +onLBDown(x, y)
+  {abstract} +onLBUp(x, y)
+  {abstract} +onMouseMove(x, y)
+  {abstract} +onPaint(ctx)
+}
+abstract class ShapeEditor {
+  #startX : number
+  #startY : number
+  #currentX : number
+  #currentY : number
+  #isDrawing : boolean
+  {abstract} #createShape() : Shape
+  {abstract} #strokeRubber(ctx)
+}
+class PointEditor
+class LineEditor
+class RectEditor
+class EllipseEditor
+class LineOOEditor
+class CubeEditor
+
+Editor <|-- ShapeEditor
+ShapeEditor <|-- PointEditor
+ShapeEditor <|-- LineEditor
+ShapeEditor <|-- RectEditor
+ShapeEditor <|-- EllipseEditor
+ShapeEditor <|-- LineOOEditor
+ShapeEditor <|-- CubeEditor
+
+' ===== Менеджер =====
+class MyEditor <<global static object>> {
+  -shapes : Shape[112]
+  -tool : Tool
+  -editor : Editor
+  +start(tool)
+  +clear()
+  +onLBDown(x, y)
+  +onLBUp(x, y)
+  +onMouseMove(x, y)
+  +onPaint(ctx)
+}
+
+MyEditor o-- Editor : поточний
+MyEditor o-- "0..112" Shape
+MyEditor ..> ShapeEditor : <<creates>>
+ShapeEditor ..> Shape : <<creates>>
+@enduml
